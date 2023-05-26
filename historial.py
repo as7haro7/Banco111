@@ -1,79 +1,64 @@
 import json
 class Historial:
     def __init__(self, codigo_cuenta, tipo_transaccion, fecha):
-        self._codigo_cuenta = codigo_cuenta  #dato privado
-        self._tipo_transaccion = tipo_transaccion  #dato privado
-        self._fecha = fecha  #dato privado
+        self.transacciones = []
+        self.__codigo_cuenta = codigo_cuenta
+        self.__tipo_transaccion = tipo_transaccion
+        self.__fecha = fecha
 
     def __str__(self):
-        return f'codigo cuenta: {self._codigo_cuenta}, tipo de transaccion: {self._tipo_transaccion}, fecha: {self._fecha}'
+        return f'codigo cuenta: {self.__codigo_cuenta}, tipo de transaccion: {self.__tipo_transaccion}, fecha: {self.__fecha}'
 
-
-
-# getters y setters creo ggg
+    # getters
     def get_codigo_cuenta(self):
-        return self._codigo_cuenta #privado
-
-    def set_codigo_cuenta(self, codigo_cuenta):
-        self._codigo_cuenta = codigo_cuenta #privado
+        return self.__codigo_cuenta
 
     def get_tipo_transaccion(self):
-        return self._tipo_transaccion #privado
+        return self.__tipo_transaccion
+    
+    def get_fecha(self):
+        return self.__fecha
+    
+    # setters    
+    def set_codigo_cuenta(self, codigo_cuenta):
+        self.__codigo_cuenta = codigo_cuenta
 
     def set_tipo_transaccion(self, tipo_transaccion):
-        self._tipo_transaccion = tipo_transaccion #privado
-
-    def get_fecha(self):
-        return self._fecha #privado
+        self.__tipo_transaccion = tipo_transaccion
 
     def set_fecha(self, fecha):
-        self._fecha = fecha #privado
+        self.__fecha = fecha
 
 
 
 # metodos         
-    @staticmethod
-    def ListarHistorial(diccionario_historial, codigo):
-        for codigo, historial in diccionario_historial.items():
-            if codigo == codigo_cuenta:
-                return(historial)
+    # @staticmethod
+    # def ListarHistorial(diccionario_historial, codigo):
+    #     for codigo, historial in diccionario_historial.items():
+    #         if codigo == codigo_cuenta:
+    #             return(historial)
             
 
-    def serializar_historial(obj):
-        if isinstance(obj, Historial):
-            return {
-                "codigo_cuenta": obj._codigo_cuenta,
-                "tipo_transaccion": obj._tipo_transaccion,
-                "fecha": obj._fecha
-            }
-        raise TypeError(f"El objeto {obj.__class__.__name__} no es serializable.")
-
     
-    def guardar_en_historial(historial):
-        # Leer el contenido existente del archivo JSON
-        try:
-            with open("historial.json", "r") as archivo_json:
-                historial_existente = json.load(archivo_json)
-        except FileNotFoundError:
-            historial_existente = {}
-
-        # Obtener el código de cuenta del historial
-        codigo_cuenta = historial["_codigo_cuenta"]
-
-        # Verificar si el código de cuenta ya existe en el historial existente
-        if codigo_cuenta in historial_existente:
-            # Si existe, agregar el nuevo historial a la lista existente
-            historial_existente[codigo_cuenta].append(historial)
+    def agregar_transaccion(self, codigo_cuenta, tipo_transaccion, fecha):
+        transaccion = {
+            'tipo_transaccion': tipo_transaccion,
+            'fecha': fecha
+        }
+        if codigo_cuenta in self.transacciones:
+            self.transacciones[codigo_cuenta].append(transaccion)
         else:
-            # Si no existe, crear una nueva lista con el historial y asignarla al código de cuenta
-            historial_existente[codigo_cuenta] = [historial]
+            self.transacciones[codigo_cuenta] = [transaccion]
 
-        # Guardar el historial actualizado en el archivo JSON
-        with open("historial.json", "w") as archivo_json:
-            json.dump(historial_existente, archivo_json)
+    def guardar_transacciones(self, archivo):
+        with open(archivo, 'w') as file:
+            json.dump(self.transacciones, file)
 
-
-
+if __name__ == '__main__':
+    historial = Historial()
+    historial.agregar_transaccion(123, 'Depósito', '2023-05-25')
+    historial.agregar_transaccion(123, 'Retiro', '2023-05-26')
+    historial.guardar_transacciones('transacciones.json')
 
 
 
