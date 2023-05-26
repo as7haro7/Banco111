@@ -1,0 +1,42 @@
+[
+    {
+        "_persona__codigo_cliente": "873D35F",
+        "_persona__nombres": "Jhon",
+        "_persona__apellidos": "Mc Clayn",
+        "_persona__cedula_identidad": "911911911",
+        "_persona__direccion": "reten policial",
+        "_persona__referencia": "911"
+    },
+    {
+        "_persona__codigo_cliente": "3f4gf5hg6",
+        "_persona__nombres": "Juan Carlos",
+        "_persona__apellidos": "Bodoque",
+        "_persona__cedula_identidad": "4321234",
+        "_persona__direccion": "Av.Conejo Rojo",
+        "_persona__referencia": "66600666"
+    },
+    {
+        "_persona__codigo_cliente": "873D35F",
+        "_persona__nombres": "Jhon",
+        "_persona__apellidos": "Mc Clayn",
+        "_persona__cedula_identidad": "911911911",
+        "_persona__direccion": "reten policial",
+        "_persona__referencia": "911"
+    },
+    {
+        "_persona__codigo_cliente": "3f4gf5hg6",
+        "_persona__nombres": "Juan Carlos",
+        "_persona__apellidos": "Bodoque",
+        "_persona__cedula_identidad": "4321234",
+        "_persona__direccion": "Av.Conejo Rojo",
+        "_persona__referencia": "66600666"
+    },
+    {
+        "_persona__codigo_cliente": "D11111A",
+        "_persona__nombres": "Ade",
+        "_persona__apellidos": "Dsa",
+        "_persona__cedula_identidad": "fgvrae",
+        "_persona__direccion": "fgae",
+        "_persona__referencia": "fea"
+    }
+]
