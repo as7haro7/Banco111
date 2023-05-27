@@ -69,17 +69,19 @@ Referencia : {self.__referencia}
 
 
 
-    def Nombre_Unico(self,usuario):
+    def Nombre_Unico(self):
         with open('Base_de_datos.json', 'r') as f:
             diccionario=json.loads(f.read())
+
+        usuario=self.get_apellidos()+self.get_nombres()
         for i in diccionario:
-            buscando=i["_persona__apellidos"]+' '+i["_persona__nombres"]
+            buscando=i["_persona__apellidos"]+i["_persona__nombres"]
             if usuario == buscando: return False
         return True
     
 
 
-    def enlistar_personas(self):
+    def enlistar_personas():
         with open('Base_de_datos.json', 'r') as f:
             diccionario=json.loads(f.read())
         lista_de_personas=[]
@@ -89,20 +91,21 @@ Referencia : {self.__referencia}
 
 
 
-    def nueva_persona(self):
-        self.set_nombres(input(f'INGRESE SUS NOMBRES :\n'))
-        self.set_apellidos(input(f'INGRESE SUS APELLIDOS :\n'))
-        usuario=self.get_apellidos()+' '+self.get_nombres()
+    def nueva_persona():
+        USUARIO=persona('none','none','none','none','none','none')
+        USUARIO.set_nombres(input(f'INGRESE SUS NOMBRES :\n'))
+        USUARIO.set_apellidos(input(f'INGRESE SUS APELLIDOS :\n'))
 
-        comprobar=self.Nombre_Unico(usuario)
-        if comprobar==False: return print(f'>>>>>>>>>>>>>>>>ESTE USUARIO YA EXISTE<<<<<<<<<<<<<<<<')
+        comprobar=USUARIO.Nombre_Unico()
+        if comprobar==False: return f'>>>>>>>>>>>>>>>>ESTE USUARIO YA EXISTE<<<<<<<<<<<<<<<<'
 
-        self.set_cedula_identidad(input(f'INSERTAR CEDULA DE IDENTIDAD :\n'))
-        self.set_direccion(input(f'INSERTAR DIRECCION\n'))
-        self.set_referencia(input(f'INSERTAR NUMERO DE REFERENCIA :\n'))
-        self.set_codigo_cliente()
+        USUARIO.set_cedula_identidad(input(f'INSERTAR CEDULA DE IDENTIDAD :\n'))
+        USUARIO.set_direccion(input(f'INSERTAR DIRECCION\n'))
+        USUARIO.set_referencia(input(f'INSERTAR NUMERO DE REFERENCIA :\n'))
+        USUARIO.set_codigo_cliente()
+        USUARIO.guardar_persona()
         print(f'SE HA GUARDADO CON EXITO')
-        self.guardar_persona()
+        return USUARIO
 
 
 
@@ -116,10 +119,13 @@ Referencia : {self.__referencia}
 
         with open('Base_de_datos.json', 'w') as f:
             f.write(json.dumps(diccionario, indent= 4))
+
+
+    # def actualizar_datos(self,variable):
         
 
         
-    def obtener_persona(self,apellido,nombre):
+    def obtener_persona(apellido,nombre):
 
         with open('Base_de_datos.json', 'r') as f:
             diccionario=json.loads(f.read())
@@ -162,7 +168,6 @@ def formato_de_nombre(n):
 
 
 if __name__=='__main__':
-
 
     print('\n-----------------------------CREANDO PERSONAS DE PRUEBA--------------------------------------')
 
@@ -235,3 +240,8 @@ if __name__=='__main__':
     usuario=persona.obtener_persona('Mc Clayn','jhon')
 
     print(usuario)
+
+    print('-----------------------------CREANDO NUEVA PERSONA---------------------------------')
+
+    usuario1=persona.nueva_persona()
+    print(usuario1)    
