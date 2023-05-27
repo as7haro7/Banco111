@@ -41,6 +41,14 @@ class Cuenta:
         return self.historial
 
 
+    def obtener_codigo_cliente(CODIGO_DE_CLIENTE):
+        with open('Base_de_datos.json', 'r') as f:
+            diccionario=json.loads(f.read())
+            
+        for i in diccionario:
+            for j in i:
+                if CODIGO_DE_CLIENTE == j: return True
+        return False
 
 
 
