@@ -66,8 +66,8 @@ class Historial:
 
 
 if __name__ == '__main__':
-    # fecha_actual = datetime.datetime.now()   
-    # fecha_actual_formateada = fecha_actual.strftime('%Y-%m-%d %H:%M:%S')
+    fecha_actual = datetime.datetime.now()   
+    fecha_actual_formateada = fecha_actual.strftime('%Y-%m-%d %H:%M:%S')
 
 # # ----------probar el metodo __str__-----------------
 #     historial = Historial()
@@ -105,20 +105,20 @@ if __name__ == '__main__':
 #     print(fecha_modificada)   
 
 
-# # # --------------------------esta parte es para probar el El guardado de instacian en JSON-------------------
-#     historial = Historial()
-
-#     historial.set_codigo_cuenta(8)
-#     historial.set_tipo_transaccion('Deposito')
-#     historial.set_fecha(fecha_actual_formateada)
-#     historial.agregar_transaccion()
-#     historial.guardar_transacciones()
-
-# --------------------------esta parte es para probar el metodo de listado por cuenta-------------------
+# # --------------------------esta parte es para probar el El guardado de instacian en JSON-------------------
     historial = Historial()
-    transacciones_cuenta = historial.listar_transacciones_por_cuenta(6)
-    for transaccion in transacciones_cuenta:
-        print(transaccion)
+
+    historial.set_codigo_cuenta("8")
+    historial.set_tipo_transaccion('Deposito')
+    historial.set_fecha(fecha_actual_formateada)
+    historial.agregar_transaccion()
+    historial.guardar_transacciones()
+
+# # --------------------------esta parte es para probar el metodo de listado por cuenta-------------------
+#     historial = Historial()
+#     transacciones_cuenta = historial.listar_transacciones_por_cuenta(6)
+#     for transaccion in transacciones_cuenta:
+#         print(transaccion)
 
     
     

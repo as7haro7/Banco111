@@ -28,5 +28,40 @@
         "codigo_cuenta": 123,
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-26 11:47:28"
+    },
+    {
+        "codigo_cuenta": 8,
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-27 10:37:38"
+    },
+    {
+        "codigo_cuenta": 8,
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-27 10:39:44"
+    },
+    {
+        "codigo_cuenta": 8,
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-27 10:39:46"
+    },
+    {
+        "codigo_cuenta": 8,
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-27 10:39:50"
+    },
+    {
+        "codigo_cuenta": 8,
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-27 10:39:51"
+    },
+    {
+        "codigo_cuenta": "8",
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-27 11:07:57"
+    },
+    {
+        "codigo_cuenta": "8",
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-27 11:23:25"
     }
 ]

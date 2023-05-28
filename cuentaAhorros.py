@@ -1,31 +1,41 @@
 from datetime import datetime
 from cuenta import Cuenta
 class CuentaAhorros(Cuenta):
-    # def __init__(self, codigo_cuenta, saldo_inicial=0):
-    #     super().__init__(codigo_cuenta, saldo_inicial)
-    #     self.interes_ganado = 0
-    def __init__(self, codigo_cuenta, codigo_cliente, saldo=0, tasa_interes=0 ):
+    def __init__(self, codigo_cuenta, codigo_cliente, saldo, interes_ganado):
         super().__init__(codigo_cuenta, codigo_cliente, saldo)
-        self.tasa_interes  = __tasa_interes 
+        self.__interes_ganado = interes_ganado
 
-    def agregar_intereses(self, tasa_interes, fecha_fin_periodo):
-        fecha_inicio_periodo = datetime.strptime(self.transacciones[-1][0], "%Y-%m-%d %H:%M:%S").date()
-        dias = (fecha_fin_periodo - fecha_inicio_periodo).days
-        intereses = self.saldo * __tasa_interes / 100 / 365 * dias
-        self.interes_ganado += intereses
-        self.saldo += intereses
+    def get_interes_ganado(self):
+        return self.__interes_ganado
 
-    def calculo_interes(self):
-        interes = self.monto * self.__tasa_interes
-        self.monto += interes
-        self.historial.append(f"Interés calculado: {interes}")
+    def set_interes_ganado(self, interes_ganado):
+        self.__interes_ganado = interes_ganado
 
 
 if __name__ == '__main__':
-    # Crear una cuenta de ahorros
-    cuenta_ahorros = CuentaAhorros(2000, 0.05)
+    cuenta_ahorros = CuentaAhorros("CA001", "CL001", 1000.0, 0.05)
 
-    # Realizar operaciones en la cuenta de ahorros
-    cuenta_ahorros.deposito(1000)
-    cuenta_ahorros.retiro(500)
-    cuenta_ahorros.calculo_interes()
+    codigo_cuenta = cuenta_ahorros.get_codigo_cuenta()
+    codigo_cliente = cuenta_ahorros.get_codigo_cliente()
+    saldo = cuenta_ahorros.get_saldo()
+    interes_ganado = cuenta_ahorros.get_interes_ganado()
+
+    print("Código de cuenta:", codigo_cuenta)
+    print("Código de cliente:", codigo_cliente)
+    print("Saldo:", saldo)
+    print("Interés ganado:", interes_ganado)
+
+    cuenta_ahorros.set_codigo_cuenta("CA002")
+    cuenta_ahorros.set_codigo_cliente("CL002")
+    cuenta_ahorros.set_saldo(1500.0)
+    cuenta_ahorros.set_interes_ganado(0.08)
+
+    nuevo_codigo_cuenta = cuenta_ahorros.get_codigo_cuenta()
+    nuevo_codigo_cliente = cuenta_ahorros.get_codigo_cliente()
+    nuevo_saldo = cuenta_ahorros.get_saldo()
+    nuevo_interes_ganado = cuenta_ahorros.get_interes_ganado()
+
+    print("Nuevo código de cuenta:", nuevo_codigo_cuenta)
+    print("Nuevo código de cliente:", nuevo_codigo_cliente)
+    print("Nuevo saldo:", nuevo_saldo)
+    print("Nuevo interés ganado:", nuevo_interes_ganado)
