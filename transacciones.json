@@ -1,56 +1,56 @@
 [
     {
-        "codigo_cuenta": 6,
+        "codigo_cuenta": "1",
         "tipo_transaccion": "Retiro",
         "fecha": "2023-05-26 09:03:21"
     },
     {
-        "codigo_cuenta": 6,
+        "codigo_cuenta": "6",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-26 09:04:03"
     },
     {
-        "codigo_cuenta": 8,
+        "codigo_cuenta": "1",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-26 09:05:06"
     },
     {
-        "codigo_cuenta": 9,
+        "codigo_cuenta": "1",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-26 10:19:28"
     },
     {
-        "codigo_cuenta": 5,
+        "codigo_cuenta": "5",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-26 10:25:27"
     },
     {
-        "codigo_cuenta": 123,
+        "codigo_cuenta": "123",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-26 11:47:28"
     },
     {
-        "codigo_cuenta": 8,
+        "codigo_cuenta": "8",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-27 10:37:38"
     },
     {
-        "codigo_cuenta": 8,
+        "codigo_cuenta": "8",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-27 10:39:44"
     },
     {
-        "codigo_cuenta": 8,
+        "codigo_cuenta": "8",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-27 10:39:46"
     },
     {
-        "codigo_cuenta": 8,
+        "codigo_cuenta": "8",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-27 10:39:50"
     },
     {
-        "codigo_cuenta": 8,
+        "codigo_cuenta": "8",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-27 10:39:51"
     },
@@ -63,5 +63,10 @@
         "codigo_cuenta": "8",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-27 11:23:25"
+    },
+    {
+        "codigo_cuenta": "8",
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-28 02:14:52"
     }
 ]

@@ -1,4 +1,7 @@
 import json
+import random
+
+
 class Cuenta:
     def __init__(self, codigo_cuenta, codigo_cliente, saldo):
         self.__codigo_cuenta = codigo_cuenta
@@ -26,23 +29,38 @@ class Cuenta:
     
 
     # METODOS DE CLASE
+    def generar_codigo_cliente(self):        
+        prefijo = "CL"
+        sufijo = str(random.randint(1000, 99999))   
+        return prefijo + sufijo
+    
     def guardar_cuenta(self):
+        self.__codigo_cliente = self.generar_codigo_cliente()
+
         cuenta_data = {
             "codigo_cuenta": self.__codigo_cuenta,
             "codigo_cliente": self.__codigo_cliente,
             "saldo": self.__saldo
         }
 
+        cuentas = []
+
+        # Verificar si ya existe una cuenta con el mismo código de cuenta
         try:
             with open("cuenta.json", "r") as file:
                 cuentas = json.load(file)
+
+                for cuenta in cuentas:
+                    if cuenta["codigo_cuenta"] == self.__codigo_cuenta:
+                        print(f"Error: Ya existe una cuenta con el código {self.__codigo_cuenta}")
+                        return
         except FileNotFoundError:
-            cuentas = []
+            pass
 
         cuentas.append(cuenta_data)
 
         with open("cuenta.json", "w") as file:
-            json.dump(cuentas, file)
+            json.dump(cuentas, file,indent=4)
             print("Cuenta guardada exitosamente en cuenta.json")
 
     def deposito(self, monto):
@@ -67,7 +85,7 @@ class Cuenta:
             return
 
         with open("cuenta.json", "w") as file:
-            json.dump(cuentas, file)
+            json.dump(cuentas, file,indent=4)
             print("Depósito realizado exitosamente")
 
     def retiro(self, monto):
@@ -96,23 +114,40 @@ class Cuenta:
     # EN PROCESO...
 
     def extracto(self):
-        pass
-    
-    
-    
-    # def extracto1(self):
-    #     return self.historial
-        return self.historial
+        extracto = {
+            'codigo_cuenta': self.__codigo_cuenta,
+            'codigo_cliente': self.__codigo_cliente,
+            'saldo': self.__saldo,
+            'transacciones': []
+        }
+
+        with open('transacciones.json') as file:
+            transacciones = json.load(file)
+
+            cuenta_encontrada = False
+            for transaccion in transacciones:
+                if transaccion['codigo_cuenta'] == self.__codigo_cuenta:
+                    cuenta_encontrada = True
+                    extracto['transacciones'].append(transaccion)
+
+            if not cuenta_encontrada:
+                return 'La cuenta no existe en el historial de transacciones.'
+        return extracto
 
 
-    def obtener_codigo_cliente(CODIGO_DE_CLIENTE):
-        with open('Base_de_datos.json', 'r') as f:
-            diccionario=json.loads(f.read())
-            
-        for i in diccionario:
-            for j in i:
-                if CODIGO_DE_CLIENTE == j: return True
-        return False
+
+    def obtener_datos_cuenta(self):
+        with open('cuenta.json') as file:
+            cuentas = json.load(file)
+
+        for cuenta in cuentas:
+            if cuenta['codigo_cuenta'] == self.__codigo_cuenta:
+                return {
+                    'codigo_cuenta': cuenta['codigo_cuenta'],
+                    'codigo_cliente': cuenta['codigo_cliente'],
+                    'saldo': cuenta['saldo']
+                }
+        return None
 
 
 
@@ -146,13 +181,13 @@ if __name__ == '__main__':
 
 
 
-    # # PRUEBA DE METODO DE GUARDAR CUENTA
-    # cuenta = Cuenta("1", "asdas",0)
-    # cuenta.guardar_cuenta()
+    # PRUEBA DE METODO DE GUARDAR CUENTA
+    cuenta = Cuenta("98", None,0)
+    cuenta.guardar_cuenta()
 
-    # PRUEBA DE DEPOSITO DE CUENTA
-    cuenta = Cuenta("1", None,None)
-    cuenta.deposito(50)
+    # # PRUEBA DE DEPOSITO DE CUENTA
+    # cuenta = Cuenta("1", None,None)
+    # cuenta.deposito(50)
     
     # # PRUEBA DE RETIRO DE CUENTA
     # cuenta = Cuenta("1", None,None)
@@ -162,5 +197,11 @@ if __name__ == '__main__':
 
     
     # # ESTO ES PARA PROBAR EL ESTRACTO
-    # extracto = cuenta.extracto()
-    # print(extracto)
+    # cuenta = Cuenta("1", None,None)  
+    # datos_cuenta = cuenta.obtener_datos_cuenta()
+    # print(datos_cuenta,type(datos_cuenta))
+    # # c=Cuenta.obtener_datos_cuenta()
+    # # print(c)
+    # # cuenta = Cuenta("198", None,None)
+    # # ext=cuenta.extracto()
+    # # print(ext)

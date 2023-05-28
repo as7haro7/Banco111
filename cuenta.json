@@ -1,1 +1,37 @@
-[{"codigo_cuenta": "1", "codigo_cliente": "ABC123", "saldo": 50}]
+[
+    {
+        "codigo_cuenta": "1",
+        "codigo_cliente": "ABC123",
+        "saldo": 100
+    },
+    {
+        "codigo_cuenta": "2",
+        "codigo_cliente": "G5ESar",
+        "saldo": 0
+    },
+    {
+        "codigo_cuenta": "5",
+        "codigo_cliente": "pheagV",
+        "saldo": 0
+    },
+    {
+        "codigo_cuenta": "6",
+        "codigo_cliente": "daZDZO",
+        "saldo": 0
+    },
+    {
+        "codigo_cuenta": "8",
+        "codigo_cliente": "tiEtXH",
+        "saldo": 0
+    },
+    {
+        "codigo_cuenta": "9",
+        "codigo_cliente": "CL8959",
+        "saldo": 0
+    },
+    {
+        "codigo_cuenta": "98",
+        "codigo_cliente": "CL54212",
+        "saldo": 0
+    }
+]
