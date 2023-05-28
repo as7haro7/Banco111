@@ -139,10 +139,8 @@ def mostrarExtracto():
 
 def listarHistorial():
     historial = Historial()
-    transacciones_cuenta = historial.listar_transacciones_por_cuenta(input("Codigo Cuenta: "))
-    for transaccion in transacciones_cuenta:
-        print(transaccion)
-    pass
+    transacciones = historial.listar_transacciones_por_cuenta(input("Codigo Cuenta: "))
+    
 
 def verDatosBanco():
     with open('configuracion.cfg.json', 'r') as f:
@@ -174,4 +172,4 @@ def salir():
 
 if __name__ == '__main__':
     os.system('clear')    
-    menu_principal() # iniciamos el programa mostrando el menú principal
+    menu_principal() 
