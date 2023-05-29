@@ -60,8 +60,13 @@ class Historial:
             for transaccion in data:
                 if transaccion['codigo_cuenta'] == codigo_cuenta:
                     transacciones_cuenta.append(transaccion)
-        # if not transacciones_cuenta:
-        #     print("No hay transacciones asociadas a la cuenta especificada.")       
+        if not transacciones_cuenta:
+            error = [
+                    {
+                        'error': 'No hay transacciones asociadas a la cuenta especificada.'
+                    }
+                    ]
+            return error      
         return transacciones_cuenta
 
 
@@ -106,7 +111,7 @@ if __name__ == '__main__':
 #     print(fecha_modificada)   
 
 
-# # # --------------------------esta parte es para probar el El guardado de instacian en JSON-------------------
+# # # --------------------------esta parte es para probar el El guardado de transaccion en JSON-------------------
 #     historial = Historial()
 
 #     historial.set_codigo_cuenta("8")
@@ -117,9 +122,10 @@ if __name__ == '__main__':
 
 # --------------------------esta parte es para probar el metodo de listado por cuenta-------------------
     historial = Historial()
-    transacciones_cuenta = historial.listar_transacciones_por_cuenta("2")
+    transacciones_cuenta = historial.listar_transacciones_por_cuenta("1")
     for transaccion in transacciones_cuenta:
-        print(transaccion)
+        print(transaccion,type(transaccion))
+    
 
     
 

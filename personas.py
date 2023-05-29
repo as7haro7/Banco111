@@ -140,6 +140,15 @@ Referencia : {self.__referencia}
                 return persona(i["_persona__codigo_cliente"],i["_persona__nombres"],i["_persona__apellidos"],i["_persona__cedula_identidad"],i["_persona__direccion"],i["_persona__referencia"])
         return False
 
+    def obtener_codigo_cliente(CODIGO_DE_CLIENTE):
+        with open('Base_de_datos.json', 'r') as f:
+            diccionario=json.loads(f.read())
+            
+        for i in diccionario:
+            for j in i:
+                if CODIGO_DE_CLIENTE == j: return True
+        return False
+
 #--------------------------------------------------------------
 #-------------------------DEFINICIONES EXTRAS (_FORMATOS_ , y mas)-------------------------------------      	        	
 def generar_codigo_cliente():

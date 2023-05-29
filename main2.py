@@ -1,9 +1,12 @@
 import os
+import platform
 import sys
 import time
 import json
 import datetime
 
+import personas
+from cuenta import Cuenta
 from historial import Historial
 
 def imprimir_diccionario(diccionario):
@@ -118,37 +121,92 @@ def enlistarPersonas():
     pass
 
 def crearCuenta():
-    # Lógica para crear una cuenta
-    pass
+    persona=personas.persona('none', 'none', 'none', 'none', 'none', 'none')
+    cod_cliente=input("Codigo de Cliente: ")
+    cuenta = Cuenta(None,cod_cliente,0)
+
+    if persona.obtener_codigo_cliente()==True:
+        cargar_anim()
+        print("*" * 40)
+        cuenta.guardar_cuenta()
+        print("*" * 40)
+    else:
+        cargar_anim()
+        print("*" * 40)
+        print("Error, Primero Registre Persona")
+        print("*" * 40)
+
+
+def guardarHistorial(cuenta,tipo_transacion):
+    fecha_actual = datetime.datetime.now()   
+    fecha_actual_formateada = fecha_actual.strftime('%Y-%m-%d %H:%M:%S')
+    historial = Historial()
+    historial.set_codigo_cuenta(cuenta)
+    historial.set_tipo_transaccion(tipo_transacion)
+    historial.set_fecha(fecha_actual_formateada)
+    historial.agregar_transaccion()
+    cargar_anim()
+    historial.guardar_transacciones() 
 
 def realizarDeposito():
-    # Lógica para realizar un depósito
-    pass
+    cod_cuenta=input("Codigo de cuenta: ")
+    cuenta = Cuenta(cod_cuenta, None,None)
+    print("*" * 40)
+    monto=int(input("Monto a depositar: "))
+    dep=cuenta.deposito(monto)
+    cargar_anim()
+    if dep==True:
+        guardarHistorial(cod_cuenta,"Deposito")
+        print("Deposito con exito")
+    else:
+        print("Cuenta no encontrada")
+    print("*" * 40)
 
 def realizarRetiro():
-    # Lógica para realizar un retiro
-    pass
+    cod_cuenta=input("Codigo de cuenta: ")
+    cuenta = Cuenta(cod_cuenta, None,None)
+    print("*" * 40)
+    monto=int(input("Monto a depositar: "))
+    ret=cuenta.retiro(monto)
+    cargar_anim()
+    if ret=="Retiro realizado exitosamente":
+        guardarHistorial(cod_cuenta,"Retiro")
+        print(ret)
+    else:
+        print(ret)
+    print("*" * 40)
 
 def calcularInteres():
     # Lógica para calcular el interés
     pass
 
 def mostrarExtracto():
-    # Lógica para mostrar el extracto
-    pass
+    cuenta = Cuenta(input("Codigo de Cuenta: "), None,None)  
+    datos_cuenta = cuenta.obtener_datos_cuenta()
+    cargar_anim()
+    imprimir_diccionario(datos_cuenta)
+    
 
 def listarHistorial():
     historial = Historial()
-    transacciones = historial.listar_transacciones_por_cuenta(input("Codigo Cuenta: "))
-    
+    transacciones_cuenta = historial.listar_transacciones_por_cuenta(input("Codigo de cuenta: "))
+    cargar_anim()
+    for transaccion in transacciones_cuenta:
+        imprimir_diccionario(transaccion)     
 
 def verDatosBanco():
     with open('configuracion.cfg.json', 'r') as f:
-        datos = json.load(f)    
+        datos = json.load(f) 
+    cargar_anim()   
     imprimir_diccionario(datos)
 
 def salir_sub_menu():
     animacion_carga(1/2,"Saliendo")
+
+def cargar_anim():
+    animacion_carga(1,"Cargando")
+    print("\n")
+
 
 def animacion_carga(duracion,mensaje):
     animacion = '|/-\\'
@@ -161,15 +219,23 @@ def animacion_carga(duracion,mensaje):
         idx = (idx + 1) % len(animacion)
         time.sleep(0.1)
 
+def limpiar_consola():
+    if platform.system() == 'Linux':
+        os.system('clear')
+    elif platform.system() == 'Windows':
+        os.system('cls')
+
 def salir():
     print('\nSaliendo...')
     # print('Cerrando sesión...')
     msg=('Guardando cambios')
 
     animacion_carga(4,msg)
-    os.system('clear') 
+    limpiar_consola() 
     print('\n¡Gracias por elegir Banco Patito! ¡Hasta pronto! 🦆💰')
 
+
+
 if __name__ == '__main__':
-    os.system('clear')    
+    limpiar_consola()    
     menu_principal() 

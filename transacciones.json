@@ -68,5 +68,25 @@
         "codigo_cuenta": "8",
         "tipo_transaccion": "Deposito",
         "fecha": "2023-05-28 02:14:52"
+    },
+    {
+        "codigo_cuenta": "1",
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-28 22:45:45"
+    },
+    {
+        "codigo_cuenta": "1",
+        "tipo_transaccion": "Retiro",
+        "fecha": "2023-05-28 22:50:51"
+    },
+    {
+        "codigo_cuenta": "1",
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-28 22:54:55"
+    },
+    {
+        "codigo_cuenta": "1",
+        "tipo_transaccion": "Retiro",
+        "fecha": "2023-05-28 22:55:18"
     }
 ]

@@ -29,13 +29,13 @@ class Cuenta:
     
 
     # METODOS DE CLASE
-    def generar_codigo_cliente(self):        
-        prefijo = "CL"
+    def generar_codigo_cuenta(self):        
+        prefijo = "CC"
         sufijo = str(random.randint(1000, 99999))   
         return prefijo + sufijo
     
     def guardar_cuenta(self):
-        self.__codigo_cliente = self.generar_codigo_cliente()
+        self.__codigo_cuenta = self.generar_codigo_cuenta()
 
         cuenta_data = {
             "codigo_cuenta": self.__codigo_cuenta,
@@ -45,7 +45,6 @@ class Cuenta:
 
         cuentas = []
 
-        # Verificar si ya existe una cuenta con el mismo código de cuenta
         try:
             with open("cuenta.json", "r") as file:
                 cuentas = json.load(file)
@@ -61,7 +60,7 @@ class Cuenta:
 
         with open("cuenta.json", "w") as file:
             json.dump(cuentas, file,indent=4)
-            print("Cuenta guardada exitosamente en cuenta.json")
+            print(f"Cuenta guardada exitosamente\ncon codigo cliente: {self.__codigo_cliente}\nSaldo: {self.__saldo}")
 
     def deposito(self, monto):
         try:
@@ -75,18 +74,11 @@ class Cuenta:
                 cuenta["saldo"] += monto
                 break 
         else:
-            # Si no se encontró la cuenta, agregar una nueva cuenta a la lista
-            # cuentas.append({
-            #     "codigo_cuenta": self.__codigo_cuenta,
-            #     "codigo_cliente": self.__codigo_cliente,
-            #     "saldo": self.__saldo + monto
-            # })
-            print("Cuenta no encontrada")
-            return
+            return(False)            
 
         with open("cuenta.json", "w") as file:
             json.dump(cuentas, file,indent=4)
-            print("Depósito realizado exitosamente")
+            return(True)
 
     def retiro(self, monto):
         try:
@@ -101,15 +93,15 @@ class Cuenta:
                     cuenta["saldo"] -= monto
                     break 
                 else:
-                    print("Saldo insuficiente para realizar el retiro")
-                    return
+                    return("Saldo insuficiente para realizar el retiro")
+                    
         else:
-            print("Cuenta no encontrada")
-            return
+            return("Cuenta no encontrada")
+            
 
         with open("cuenta.json", "w") as file:
             json.dump(cuentas, file,indent=4)
-            print("Retiro realizado exitosamente")
+            return("Retiro realizado exitosamente")
 
     # EN PROCESO...
 
@@ -181,9 +173,9 @@ if __name__ == '__main__':
 
 
 
-    # PRUEBA DE METODO DE GUARDAR CUENTA
-    cuenta = Cuenta("98", None,0)
-    cuenta.guardar_cuenta()
+    # # PRUEBA DE METODO DE GUARDAR CUENTA
+    # cuenta = Cuenta("98", None,0)
+    # cuenta.guardar_cuenta()
 
     # # PRUEBA DE DEPOSITO DE CUENTA
     # cuenta = Cuenta("1", None,None)
@@ -196,12 +188,17 @@ if __name__ == '__main__':
 
 
     
-    # # ESTO ES PARA PROBAR EL ESTRACTO
-    # cuenta = Cuenta("1", None,None)  
-    # datos_cuenta = cuenta.obtener_datos_cuenta()
-    # print(datos_cuenta,type(datos_cuenta))
-    # # c=Cuenta.obtener_datos_cuenta()
-    # # print(c)
-    # # cuenta = Cuenta("198", None,None)
-    # # ext=cuenta.extracto()
-    # # print(ext)
+    # ESTO ES PARA PROBAR EL ESTRACTO
+    cuenta = Cuenta("1", None,None)  
+    datos_cuenta = cuenta.obtener_datos_cuenta()
+    print(datos_cuenta,type(datos_cuenta))
+
+
+
+
+    
+    # c=Cuenta.obtener_datos_cuenta()
+    # print(c)
+    # cuenta = Cuenta("198", None,None)
+    # ext=cuenta.extracto()
+    # print(ext)
