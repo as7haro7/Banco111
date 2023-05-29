@@ -2,7 +2,7 @@
     {
         "codigo_cuenta": "1",
         "codigo_cliente": "ABC123",
-        "saldo": 106739
+        "saldo": 119051
     },
     {
         "codigo_cuenta": "2",
@@ -43,5 +43,10 @@
         "codigo_cuenta": "1321569",
         "codigo_cliente": "CL55376",
         "saldo": 0
+    },
+    {
+        "codigo_cuenta": "CC12075",
+        "codigo_cliente": "873D35F",
+        "saldo": 9561
     }
 ]
