@@ -48,5 +48,25 @@
         "codigo_cuenta": "CC12075",
         "codigo_cliente": "873D35F",
         "saldo": 9561
+    },
+    {
+        "codigo_cuenta": "CC92817",
+        "codigo_cliente": "L11111A",
+        "saldo": 0
+    },
+    {
+        "codigo_cuenta": "CC24760",
+        "codigo_cliente": "3f4gf5hg6",
+        "saldo": 4500
+    },
+    {
+        "codigo_cuenta": "CC24352",
+        "codigo_cliente": "S11111A",
+        "saldo": 10000000
+    },
+    {
+        "codigo_cuenta": "CC72942",
+        "codigo_cliente": "G11111D",
+        "saldo": 4999000
     }
 ]

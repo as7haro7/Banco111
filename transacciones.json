@@ -113,5 +113,30 @@
         "codigo_cuenta": "CC12075",
         "tipo_transaccion": "Retiro",
         "fecha": "2023-05-28 23:59:29"
+    },
+    {
+        "codigo_cuenta": "CC24760",
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-29 11:32:05"
+    },
+    {
+        "codigo_cuenta": "CC24760",
+        "tipo_transaccion": "Retiro",
+        "fecha": "2023-05-29 11:32:28"
+    },
+    {
+        "codigo_cuenta": "CC24352",
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-29 12:02:58"
+    },
+    {
+        "codigo_cuenta": "CC72942",
+        "tipo_transaccion": "Deposito",
+        "fecha": "2023-05-30 09:11:46"
+    },
+    {
+        "codigo_cuenta": "CC72942",
+        "tipo_transaccion": "Retiro",
+        "fecha": "2023-05-30 09:11:58"
     }
 ]

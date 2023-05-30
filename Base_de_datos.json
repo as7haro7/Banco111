@@ -38,5 +38,29 @@
         "_persona__cedula_identidad": "fgvrae",
         "_persona__direccion": "fgae",
         "_persona__referencia": "fea"
+    },
+    {
+        "_persona__codigo_cliente": "L11111A",
+        "_persona__nombres": "Alex Tttt",
+        "_persona__apellidos": "Lopez Obbb",
+        "_persona__cedula_identidad": "797979",
+        "_persona__direccion": "su casita",
+        "_persona__referencia": "7964656"
+    },
+    {
+        "_persona__codigo_cliente": "S11111A",
+        "_persona__nombres": "Ademar",
+        "_persona__apellidos": "Santos",
+        "_persona__cedula_identidad": "lokijuhygt",
+        "_persona__direccion": "casa",
+        "_persona__referencia": "09876"
+    },
+    {
+        "_persona__codigo_cliente": "G11111D",
+        "_persona__nombres": "Dani",
+        "_persona__apellidos": "Gonzales",
+        "_persona__cedula_identidad": "77777",
+        "_persona__direccion": "Casa de Dani",
+        "_persona__referencia": "888888"
     }
 ]

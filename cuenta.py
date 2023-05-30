@@ -51,7 +51,7 @@ class Cuenta:
 
                 for cuenta in cuentas:
                     if cuenta["codigo_cuenta"] == self.__codigo_cuenta:
-                        print(f"Error: Ya existe una cuenta con el código {self.__codigo_cuenta}")
+                        print(f"Error: Ya existe una cuenta con el código {self.__codigo_Cliente}")
                         return
         except FileNotFoundError:
             pass
@@ -60,7 +60,7 @@ class Cuenta:
 
         with open("cuenta.json", "w") as file:
             json.dump(cuentas, file,indent=4)
-            print(f"Cuenta guardada exitosamente\ncon codigo cliente: {self.__codigo_cliente}\nSaldo: {self.__saldo}")
+            print(f"Cuenta guardada exitosamente\ncon codigo cliente: {self.__codigo_cliente}\nCodigo Cuenta: {self.__codigo_cuenta} \nSaldo: {self.__saldo}")
 
     def deposito(self, monto):
         try:

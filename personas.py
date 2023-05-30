@@ -33,21 +33,84 @@ class persona:
 #--------------------------------------------------------------
 #------------------------SETERS--------------------------------        
                         
-    def set_nombres(self,new):
+    def set_nombres(self,new,perma=False):
+        variable=self
         new=formato_de_nombre(new)
-        self.__nombres = new
+        variable.__nombres = new 
+        prueba=variable.Nombre_Unico()
+        if prueba==False: return print(f'EL NOMBRE NO ESTA DISPONIBLE')       
+        if perma==True:
+            with open('Base_de_datos.json', 'r') as f:
+                diccionario=json.loads(f.read())        
+            busqueda=self.__dict__
+            for i in diccionario:
+                if busqueda==i:
+                    i["_persona__nombres"]=new
+                    break
+            with open('Base_de_datos.json','w') as x:
+                x.write(json.dumps(diccionario, indent=4))
+            
+
         
-    def set_apellidos(self,new):
-        new=formato_de_nombre(new)
-        self.__apellidos = new
+    def set_apellidos(self,new,perma=False):
+        variable=self
+        new=formato_de_nombre(new)  
+        variable.__apellidos = new
+        prueba=variable.Nombre_Unico()
+        if prueba==False: return print(f'EL APELLIDO NO ESTA DISPONIBLE')        
+        if perma==True:
+            with open('Base_de_datos.json', 'r') as f:
+                diccionario=json.loads(f.read())
+            busqueda=self.__dict__
+            for i in diccionario:
+                if busqueda==i:
+                    i["_persona__apellidos"]=new
+                    break
+            with open('Base_de_datos.json','w') as x:
+                x.write(json.dumps(diccionario, indent=4))
+            
+
         
-    def set_cedula_identidad(self,new):
+    def set_cedula_identidad(self,new,perma=False):
+        if perma==True:            
+            with open('Base_de_datos.json', 'r') as f:
+                diccionario=json.loads(f.read())
+            busqueda=self.__dict__
+            for i in diccionario:
+                if busqueda==i:
+                    i["_persona__cedula_identidad"]=new
+                    break
+            with open('Base_de_datos.json','w') as x:
+                x.write(json.dumps(diccionario, indent=4))
+            
         self.__cedula_identidad = new
         
-    def set_direccion(self,new):
+    def set_direccion(self,new,perma=False):
+        if perma==True:           
+            with open('Base_de_datos.json', 'r') as f:
+                diccionario=json.loads(f.read())
+            busqueda=self.__dict__
+            for i in diccionario:
+                if busqueda==i:
+                    i["_persona__direccion"]=new
+                    break
+            with open('Base_de_datos.json','w') as x:
+                x.write(json.dumps(diccionario, indent=4))
+            
         self.__direccion = new
         	
-    def set_referencia(self,new):
+    def set_referencia(self,new,perma=False):
+        if perma==True:            
+            with open('Base_de_datos.json', 'r') as f:
+                diccionario=json.loads(f.read())
+            busqueda=self.__dict__
+            for i in diccionario:
+                if busqueda==i:
+                    i["_persona__referencia"]=new
+                    break
+            with open('Base_de_datos.json','w') as x:
+                x.write(json.dumps(diccionario, indent=4))
+            
         self.__referencia = new
         	
     def set_codigo_cliente(self):        	
@@ -103,6 +166,10 @@ Referencia : {self.__referencia}
         USUARIO.set_direccion(input(f'INSERTAR DIRECCION\n'))
         USUARIO.set_referencia(input(f'INSERTAR NUMERO DE REFERENCIA :\n'))
         USUARIO.set_codigo_cliente()
+        print(f'ESTE ES SU NUEVO CODIGO DE USUARIO---------->{USUARIO.get_codigo_cliente()}')
+        print(f'ESTOS SON LOS DATOS DE LA NUEVA PERSONA')
+        print(USUARIO)
+
         USUARIO.guardar_persona()
         print(f'SE HA GUARDADO CON EXITO')
         return USUARIO
@@ -140,30 +207,24 @@ Referencia : {self.__referencia}
                 return persona(i["_persona__codigo_cliente"],i["_persona__nombres"],i["_persona__apellidos"],i["_persona__cedula_identidad"],i["_persona__direccion"],i["_persona__referencia"])
         return False
 
-    # def obtener_codigo_cliente(CODIGO_DE_CLIENTE):
-    #     with open('Base_de_datos.json', 'r') as f:
-    #         diccionario=json.loads(f.read())
-            
-    #     for i in diccionario:
-    #         for j in i:
-    #             if CODIGO_DE_CLIENTE == j: return True
-    #     return False
+    def obtener_persona_codigo_usuario(codigo):
 
-    def obtener_codigo_cliente(CODIGO_DE_CLIENTE):
         with open('Base_de_datos.json', 'r') as f:
-            diccionario = json.load(f)
-
-        for cliente in diccionario:
-            if CODIGO_DE_CLIENTE in cliente:
-                return True
-        return False
-
-    def ob_per_code(codigo):
-        with open('Base_de_datos.json', 'r') as f:
-            diccionario = json.load(f)
+            diccionario=json.loads(f.read())
 
         for i in diccionario:
-            if codigo == i["_persona__codigo_cliente"]:
+            if codigo==i["_persona__codigo_cliente"]:
+                return persona(i["_persona__codigo_cliente"],i["_persona__nombres"],i["_persona__apellidos"],i["_persona__cedula_identidad"],i["_persona__direccion"],i["_persona__referencia"])
+
+        return False
+    
+    def ob_per_code(codigo):
+
+        with open('Base_de_datos.json', 'r') as f:
+            diccionario=json.loads(f.read())
+
+        for i in diccionario:
+            if codigo==i["_persona__codigo_cliente"]:
                 return True
 
         return False

@@ -8,7 +8,7 @@ import datetime
 import personas
 from cuenta import Cuenta
 from historial import Historial
-
+import cuenta_ahorros
 def imprimir_diccionario(diccionario):
     print("*" * 40)
     for clave, valor in diccionario.items():
@@ -17,12 +17,6 @@ def imprimir_diccionario(diccionario):
 
 def estilo_banco_patito():
     print("\033[1;36m")  # Establece el color del texto a cian brillante y negrita                                   
-
-    # print("888b.                          888b.       w   w  w         ")
-    # print("8wwwP .d88 8d8b. .d8b .d8b.    8  .8 .d88 w8ww w w8ww .d8b. ")
-    # print("8   b 8  8 8P Y8 8    8' .8    8wwP' 8  8  8   8  8   8' .8 ")
-    # print("888P' `Y88 8   8 `Y8P `Y8P'    8     `Y88  Y8P 8  Y8P `Y8P' ")  
-
     print("(|~  |~) _  _  _ _   |~) _ _|_|_ _   (|~") 
     print("_|)  |_)(_|| |(_(_)  |~ (_| ||| (_)  _|)")                                         
                                       
@@ -75,8 +69,8 @@ def menu_principal():
 def submenu_gestion_personas():
     opciones_personas = {
         '1': ('Agregar Persona nueva', agregarPersona),
-        '2': ('Pedir datos de una persona', pedirDatosPersona),
-        '3': ('Cambiar datos de una persona', cambiarDatosPersona),
+        '2': ('Pedir datos de una persona', submenu_pedirDatosPersona_post),
+        '3': ('Cambiar datos de una persona', submenu_cambiarDatosPersona_post),
         '4': ('Enlistar personas', enlistarPersonas),
         '5': ('Salir', salir_sub_menu)
     }
@@ -103,22 +97,121 @@ def submenu_configuracion_banco():
     }
 
     generar_menu('Submenú Configuración del Banco', opciones_configuracion, '2')
+    
+# -----------------------------------------------------------------------------------------------------
 
 def agregarPersona():
-    # Lógica para agregar una nueva persona
-    pass
+    personas.persona.nueva_persona()
 
-def pedirDatosPersona():
-    # Lógica para pedir datos de una persona
-    pass
+
+def submenu_pedirDatosPersona_post():
+    print(f'COMO DESEA OBTENER SUS DATOS??')
+    opciones_personas = {
+        '1': ('INGRESANDO NOMBRES Y APELLIDOS', MedioNombresApellidos),
+        '2': ('INGRESANDO CODIGO DE USUARIO', MedioCodigoUsuario),
+        '3': ('Salir', salir_sub_menu)
+    }
+
+    generar_menu('Submenú Gestión de Cuentas', opciones_personas, '3')
+
+def MedioNombresApellidos():
+    global gg
+    nombres=input(f'INGRESE SUS NOMBRES------------>')
+    apellidos=input(f'INGRESE SUS APELLIDOS------------>')
+    gg=personas.persona.obtener_persona(apellidos,nombres)
+    if gg==False:print(f'El usuario ingresado no existe')
+    else:submenu_pedirDatosPersona()
+
+def MedioCodigoUsuario():
+    global gg
+    codigo=input(f'INGRESE SU CODIGO DE USUARIO------------------>')
+    gg=personas.persona.obtener_persona_codigo_usuario(codigo)
+    if gg==False:print(f'El usuario ingresado no existe')
+    else:submenu_pedirDatosPersona()
+
+
+def submenu_pedirDatosPersona():
+    print(f'Elija el dato que quiera saber')
+    opciones_personas = {
+        '1': ('Pedir Codigo de Usuario', PedirCodigoUsuario),
+        '2': ('Pedir Nombres', PedirNombres),
+        '3': ('Pedir Apellidos', PedirApellidos),
+        '4': ('Pedir Carnet de Identaidad', PedirCarnetIdentidad),
+        '5': ('Pedir Direccion', PedirDireccion),
+        '6': ('Pedir Referencia', PedirReferencia),
+        '7': ('Salir', salir_sub_menu)
+    }
+
+    generar_menu('Submenú Gestión de Cuentas', opciones_personas, '7')
+
+def PedirCodigoUsuario():
+    global gg
+    print(f'EL DATO PEDIDO ES ---------->{gg.get_codigo_cliente()}')
+def PedirNombres():
+    global gg
+    print(f'EL DATO PEDIDO ES ---------->{gg.get_nombres()}')
+def PedirApellidos():
+    global gg
+    print(f'EL DATO PEDIDO ES ---------->{gg.get_apellidos()}')
+def PedirCarnetIdentidad():
+    global gg
+    print(f'EL DATO PEDIDO ES ---------->{gg.get_cedula_identidad()}')
+def PedirDireccion():
+    global gg
+    print(f'EL DATO PEDIDO ES ---------->{gg.get_direccion()}')
+def PedirReferencia():
+    global gg
+    print(f'EL DATO PEDIDO ES ---------->{gg.get_referencia()}')
+
+def submenu_cambiarDatosPersona_post():
+    global gg2
+    codigo=input(f'INGRESE SU CODIGO DE USUARIO------------------>')
+    gg2=personas.persona.obtener_persona_codigo_usuario(codigo)
+    if gg2==False:print(f'El usuario ingresado no existe')
+    else:cambiarDatosPersona()
 
 def cambiarDatosPersona():
-    # Lógica para cambiar datos de una persona
-    pass
+    print(f'Elija el dato que decea cambiar')
+    opciones_personas = {
+        '1': ('Cambiar Nombres', ChangeNombres),
+        '2': ('Cambiar Apellidos', ChangeApellidos),
+        '3': ('Cambiar Carnet de Identaidad', ChangeCarnetIdentidad),
+        '4': ('Cambiar Direccion', ChangeDireccion),
+        '5': ('Cambiar Referencia', ChangeReferencia),
+        '6': ('Salir', salir_sub_menu)
+    }
+
+    generar_menu('Submenú Gestión de Cuentas', opciones_personas, '6')
+
+def ChangeNombres():
+    global gg2
+    nuevo=input(f'INGRESE NUEVO DATO----------------->')
+    gg2.set_nombres(nuevo,True)
+    
+def ChangeApellidos():
+    global gg2
+    nuevo=input(f'INGRESE NUEVO DATO----------------->')
+    gg2.set_apellidos(nuevo,True)
+    
+def ChangeCarnetIdentidad():
+    global gg2
+    nuevo=input(f'INGRESE NUEVO DATO----------------->')
+    gg2.set_cedula_identidad(nuevo,True)
+    
+def ChangeDireccion():
+    global gg2
+    nuevo=input(f'INGRESE NUEVO DATO----------------->')
+    gg2.set_direccion(nuevo,True)
+    
+def ChangeReferencia():
+    global gg2
+    nuevo=input(f'INGRESE NUEVO DATO----------------->')
+    gg2.set_referencia(nuevo,True)
+    
 
 def enlistarPersonas():
-    # Lógica para enlistar personas
-    pass
+    print(f'ESTA ES LA LISTA DE TODAS LAS PERSONAS\n{personas.persona.enlistar_personas()}\n')
+# -----------------------------------------------------------------------------------------------------
 
 def crearCuenta():
     cod_cliente=input("Codigo de Cliente: ")
@@ -174,11 +267,27 @@ def realizarRetiro():
     else:
         print(ret)
     print("*" * 40)
+# ----------------------------------------------------------------
 
 def calcularInteres():
-    # Lógica para calcular el interés
-    pass
+    opciones_personas = {
+        '1': ('Verificar intereses', VerificarInteres),
+        '2': ('siguiente dia', SiguienteDia),
+        '3': ('Salir', salir_sub_menu)
+    }
 
+    generar_menu('Submenú Gestión de Cuentas', opciones_personas, '3')
+
+def VerificarInteres():
+    CUENTA=input(f'INTRODUCE TU NUMERO DE CUENTA')
+    cuentita=Cuenta(CUENTA,'none','none')
+    cuentita.obtener_datos_cuenta()
+    cuenta_ahorros.CuentaAhorros.mostrar_intereses(cuentita)
+
+def SiguienteDia():
+    cuenta_ahorros.CuentaAhorros.calculo_de_interes()
+    
+# ----------------------------------------------------------------
 def mostrarExtracto():
     cuenta = Cuenta(input("Codigo de Cuenta: "), None,None)  
     datos_cuenta = cuenta.obtener_datos_cuenta()
